@@ -20,6 +20,8 @@ repositories {
 // gradle이나 maven같은 build tool들은 의존관계를 관리해준다
 // 예로, spring-boot-starter-web이 의존하고 있는 라이브러리들(tomcat, spring core... 등)을 전부 땡겨온다
 dependencies {
+	// spring boot devtools - 저장 시 서버 재실행
+	compileOnly("org.springframework.boot:spring-boot-devtools")
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	// test library가 자동으로 들어감 (junit5)

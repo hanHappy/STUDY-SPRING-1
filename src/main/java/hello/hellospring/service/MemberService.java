@@ -3,14 +3,19 @@ package hello.hellospring.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import hello.hellospring.domain.Member;
 import hello.hellospring.repository.MemberRepository;
 
 // Service는 비즈니스에 의존적으로 개발한다
 // 따라서 용어도 비즈니스적으로 네이밍한다
+@Service
 public class MemberService {
     private final MemberRepository repository;
 
+    @Autowired
     public MemberService(MemberRepository repository) {
         this.repository = repository;
     }
@@ -21,7 +26,8 @@ public class MemberService {
     public Long join(Member member) {
         // 같은 이름이 있는 중복 회원 불가
 
-        // Optional 안에 객체가 있는 형태
+        // 데이터를 바로 받지 않고,
+        // Optional 안에 데이터 객체가 있는 형태
         // null일 가능성이 있으면 Optional을 사용하도록 한다
         // 그런데 아래와 같이 Optional을 바로 반환하는 것은 권장되지 않는다
         // Optional<Member> result = repository.findByName(member.getName());
