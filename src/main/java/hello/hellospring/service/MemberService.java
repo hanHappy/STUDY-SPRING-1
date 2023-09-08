@@ -4,14 +4,14 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import hello.hellospring.domain.Member;
 import hello.hellospring.repository.MemberRepository;
 
+@Transactional  // JPA는 모든 데이터 변경이 Transaction 안에서 실행되어야 한다
 // Service는 비즈니스에 의존적으로 개발한다
 // 따라서 용어도 비즈니스적으로 네이밍한다
-@Service
 public class MemberService {
     private final MemberRepository repository;
 
@@ -32,7 +32,6 @@ public class MemberService {
         // 그런데 아래와 같이 Optional을 바로 반환하는 것은 권장되지 않는다
         // Optional<Member> result = repository.findByName(member.getName());
         validateDuplicateMember(member);
-
         repository.save(member);
         return member.getId();
     }
